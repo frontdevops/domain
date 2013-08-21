@@ -39,4 +39,21 @@ Add Russian-language domain
     domain add главпрог.рф
 
 
+### Installation
+
+    mkdir /etc/nginx/sites-available
+    mkdir /etc/nginx/sites-enabled
+
+    git clone https://github.com/i0z/domain.git
+
+Enjoy a refreshing Diet Coke and wait
+
+
+### Domain - конфигуратор для Nginx
+
+Это консольный конфигуратор для конфигурационных файлов сервера Nginx. Позволяет избавиться от рутины при создании доменов, их редактировании и управлении.
+Особенно удобен при работе с доменами в крилической доменной зоне. Утилита автоматически конвертирует рускоязычное доменное имя в IDNA формат, а имена директорий для домена записывает в транслитерации.
+
+
+
 `EOF`
