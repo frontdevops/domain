@@ -1,0 +1,179 @@
+#!/bin/bash
+
+# Path for Nginx config files
+cdir=/etc/nginx
+
+# Path to current tools dir
+curdir=$cdir/domain
+
+# Settings for Nginx host block
+logdir=/var/log/sites
+listen=80
+sitesdir=/www/sites
+
+# User and group for WWW directories
+user=i0z
+group=www-data
+
+# Path to installed nginx binaty file
+nginx=/usr/local/nginx/nginx
+
+# My favorite editor
+edit="mcedit"
+
+################################################
+
+help()
+{
+    cat <<HELP
+
+Usage:
+    domain [add|edit|del|enable|disable] domain.name [full]
+Example:
+    domain add miuapps.com        - add only domain
+    domain add miuapps.com full   - add domain, logdir, dir for web pages
+    domain set miuapps.com [full] - add full domain and reload server config
+HELP
+}
+
+
+command=${1?:"Empty args! `help`"}
+
+if [ $command == "reload" ]
+then
+    $nginx -t && /etc/init.d/nginx reload
+    #&& killall -1 nginx
+    exit $?
+fi
+
+if [ $command == "list" ]
+then
+    ls $cdir/sites-available/ | xargs -i echo {}
+    exit $?
+fi
+
+
+domain=${2?:"Empty domain!"}
+rfd=rf
+
+if [ $command == "set" ]
+then
+    ./domain add $domain $3
+    ./domain enable $domain
+    exit $?
+fi
+
+# Translator for russian cyrilic domains
+translit_domain()
+{
+  echo "$@"|sed 'y/абвгдезиклмнопрстуфцыАБВГДЕЗИКЛМНОПРСТУФЦЫ/abvgdeziklmnoprstufcyABVGDEZIKLMNOPRSTUFCY/
+    s/ё/yo/
+    s/Ё/yO/
+    s/ж/zh/
+    s/Ж/ZH/
+    s/й/jj/
+    s/Й/JJ/
+    s/х/h/
+    s/Х/H/
+    s/ч/ch/
+    s/Ч/CH/
+    s/ш/sh/
+    s/Ш/SH/
+    s/щ/sch/
+    s/Щ/SCH/
+    s/э/ye/
+    s/Э/YE/
+    s/ю/yu/
+    s/Ю/YU/
+    s/я/ya/
+    s/Я/YA/
+    s/ъ//
+    s/Ъ//
+    s/ь//
+    s/Ь//' | sed 's/я/ya/
+    s/Я/YA/'
+}
+
+if [ "$rfd" = "0" ]
+then
+    domdir=$domain
+else
+    domdir=$(translit_domain $domain)
+    domain=`idn --quiet -a -- "$domain"`
+fi
+
+cfile=$cdir/sites-available/$domdir
+efile=$cdir/sites-enabled/$domdir
+
+check_domain_name()
+{
+    if [ -z "`ls $cdir/sites-available | grep "^$domdir$"`" ]
+    then
+    echo "Unknown domain [$domdir] ! Available domains:"
+        for f in `ls $cdir/sites-available`
+    do
+        echo -e "\t$f"
+        done
+    exit 1
+    fi
+}
+
+
+case $command in
+    add)
+	sed "s~%%DOMAIN%%~$domain~g
+	     s~%%DOMAINDIR%%~$domdir~g
+	     s~%%LISTEN%%~$listen~g" $curdir/domain.tpl > $cfile
+
+	    $edit $cfile
+
+	    if [ "$3" == "full"  ]
+	    then
+		sitep=$sitesdir/$domdir/www
+		mkdir -p $sitep
+#		touch $logdir/$domdir/access.log
+
+	        echo -e "User-agent: *\nDisallow: /" >  $sitep/robots.txt
+	        cat $curdir/domain-index.php.tpl > $sitep/index.php
+    		cat $curdir/domain-index.htm.tpl > $sitep/index.html
+	        chown -R $user:$group $sitesdir/$domdir
+	    fi
+    ;;
+    edit)
+        check_domain_name
+	$edit $cfile
+        $0 reload
+    ;;
+    del)
+	unlink $cfile
+        unlink $efile
+        rm -rf $logdir/$domdir
+        rm -rf $sitesdir/$domdir
+        $0 reload
+    ;;
+    enable)
+        check_domain_name
+        if [ -f $cfile ]
+        then
+	    ln -fs $cfile $efile
+    	    ls -l $cdir/sites-enabled/
+            $0 reload
+	else
+    	    echo "Can't enable domain!"
+        exit 1
+        fi
+    ;;
+    disable)
+	unlink $efile
+        $0 reload
+    ;;
+    ping)
+	ping $domain
+    ;;
+    *)
+        echo "Unknown command [$1] !"
+	help
+    ;;
+esac
+
+#EOF#
