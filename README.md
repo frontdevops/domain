@@ -3,9 +3,12 @@ Domain - Nginx configurator
 
 Utility for configuration management server Nginx.
 
-This utility allows you to quickly and easily add and edit the config files with domain names. You can quickly turn off or Vklyucht desired domain posomtret list of already created domains. When you restart the server should provreka sintaskisa configuration files.
+This utility allows you to quickly and easily add and edit the config files with domain names.
+You can quickly turn off or on desired domain posomtret list of already created domains.
+When you restart the server should provreka sintaskisa configuration files.
 
-Very convenient to add domain names in Cyrillic zone of the Russian Federation. The domain name is automatically converted into IDNA format, and the directory name for the site is written transliteration.
+Very convenient to add domain names in cyrillic zone of the Russian Federation.
+The domain name is automatically converted into IDNA format, and the directory name for the site is written transliteration.
 
 
 ### Usage
