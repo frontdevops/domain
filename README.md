@@ -39,4 +39,4 @@ Add Russian-language domain
     domain add главпрог.рф
 
 
-#EOF#
+`EOF`
