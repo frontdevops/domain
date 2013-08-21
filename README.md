@@ -44,7 +44,28 @@ Add Russian-language domain
     mkdir /etc/nginx/sites-available
     mkdir /etc/nginx/sites-enabled
 
+Get the code
+
     git clone https://github.com/i0z/domain.git
+
+Open file `domain` and edit config section
+
+    #!/bin/bash
+    # Path for Nginx config files
+    cdir=/etc/nginx
+    # Path to current tools dir
+    curdir=$cdir/domain
+    # Settings for Nginx host block
+    logdir=/var/log/sites
+    listen=80
+    sitesdir=/www/sites
+    # User and group for WWW directories
+    user=i0z
+    group=www-data
+    # Path to installed nginx binaty file
+    nginx=/usr/local/nginx/nginx
+    # My favorite editor
+    edit="mcedit"
 
 Enjoy a refreshing Diet Coke and wait
 
