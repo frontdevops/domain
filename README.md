@@ -21,10 +21,6 @@ Add only domain config file, but not enable it
 
     domain add miuapps.com
 
-Add domain, dir for web pages
-
-    domain add miuapps.com full
-
 Add domain config, create domain directory and reload server config
 
     domain add miuapps.com full
