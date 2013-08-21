@@ -14,23 +14,29 @@ Very convenient to add domain names in Cyrillic zone of the Russian Federation. 
 
 ### Example
 
-    domain add miuapps.com        - add only domain
-    domain add miuapps.com full   - add domain, logdir, dir for web pages
-    domain set miuapps.com [full] - add full domain and reload server config
+Add only domain config file, but not enable it
 
-Domain - конфигуратор Nginx
---------------------------
+    domain add miuapps.com
 
-Утилита для удобной работы с конфигурационными файлами Nginx.
+Add domain, dir for web pages
 
-Эта утилита позволяет быстро и удобно добавлять и редактировать конфиги с доменными именами. Можно быстро выключить или включть нужный домен, посомтреть список уже созданных доменов. При перезагрузке сервера производится проврека синтаскиса конфигурационных файлов.
+    domain add miuapps.com full
 
-Очень удобно добавлять имена в кирилической доменной зоне РФ. Доменное имя автоматически конвертируется в IDNA формате, а название директории для сайта записывается транслитерацией.
+Add domain config, create domain directory and reload server config
 
+    domain add miuapps.com full
 
-### Как использовать
+Enable disabled or not activ domain config. Simply create a link to the configuration file from a directory site-availables in site-enabled.
 
+    domain enable miuapps.com
 
+Show all created domains
+
+    domain list
+
+Add Russian-language domain
+
+    domain add главпрог.рф
 
 
 #EOF#
