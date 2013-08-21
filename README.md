@@ -48,7 +48,7 @@ Get the code
 
     git clone https://github.com/i0z/domain.git
 
-Open file `domain` and edit config section
+Open file [domain](https://github.com/i0z/domain/blob/master/domain) and edit config section
 
     #!/bin/bash
     # Path for Nginx config files
