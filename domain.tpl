@@ -1,5 +1,5 @@
 server {
-    listen  80;
+    listen %%LISTEN%%;
     server_name www.%%DOMAIN%%;
     rewrite ^/(.*)$ http://%%DOMAIN%%/$1 permanent;
 }
