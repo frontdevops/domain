@@ -3,9 +3,6 @@
 # Path for Nginx config files
 cdir=/etc/nginx
 
-# Path to current tools dir
-curdir=$cdir/domain
-
 # Settings for Nginx host block
 logdir=/var/log/sites
 listen=80
@@ -20,6 +17,9 @@ nginx=/usr/local/nginx/nginx
 
 # My favorite editor
 edit="mcedit"
+
+# Path to current tools dir
+curdir=`dirname $0`/
 
 ################################################
 
