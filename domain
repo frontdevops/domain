@@ -4,15 +4,15 @@
 cdir=/etc/nginx
 
 # Path to current tools dir
-curdir=$cdir/domain
+curdir=`dirname $0`/
 
 # Settings for Nginx host block
 logdir=/var/log/sites
-listen=80
+listen="87.118.114.208:80"
 sitesdir=/www/sites
 
 # User and group for WWW directories
-user=i0z
+user=major
 group=www-data
 
 # Path to installed nginx binaty file
