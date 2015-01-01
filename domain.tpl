@@ -6,9 +6,11 @@ server {
 
 server {
     listen %%LISTEN%%:80;
-    server_name %%DOMAIN%%;
 
-	set $root "/www/sites/%%DOMAINDIR%%/www";
+	set $sname %%DOMAIN%%;
+	set $root "/www/sites/$sname/www";
+
+    server_name %%DOMAIN%%;
     root $root;
 
     index index.htm index.html index.php;
