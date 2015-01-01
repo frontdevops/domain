@@ -40,8 +40,16 @@ Add Russian-language domain
 
 ### Installation
 
-    mkdir /etc/nginx/sites-available
-    mkdir /etc/nginx/sites-enabled
+```bash
+$ mkdir /etc/nginx/sites-available
+$ mkdir /etc/nginx/sites-enabled
+```
+
+or run
+
+```bash
+$ ~/domain/install
+```
 
 Get the code
 
