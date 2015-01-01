@@ -1,0 +1,18 @@
+_domain()
+{
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=(\
+        $(\
+            (\
+                ls /etc/nginx/sites-available;\
+		echo -e "add\nset\nedit\ndel\nenable\ndisable\nreload\nlist"\
+	    )\
+	    | grep ^$cur\
+	)\
+    )
+    return 0
+}
+
+complete -F _domain domain
