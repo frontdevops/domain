@@ -4,7 +4,7 @@
 cdir=/etc/nginx
 
 # Settings for Nginx host block
-listen="87.118.114.208:80"
+listen="87.118.114.208"
 logdir=/var/log/sites
 sitesdir=/www/sites
 
@@ -19,7 +19,7 @@ nginx=/usr/sbin/nginx
 edit="mcedit"
 
 # Path to current tools dir
-curdir=$(dirname $0)/
+curdir=~/domain/
 
 ################################################
 
@@ -109,29 +109,29 @@ check_domain_name()
 {
     if [ -z "`ls $cdir/sites-available | grep "^$domdir$"`" ]
     then
-    echo "Unknown domain [$domdir] ! Available domains:"
+	    echo "Unknown domain [$domdir] ! Available domains:"
         for f in `ls $cdir/sites-available`
-    do
-        echo -e "\t$f"
+    	do
+        	echo -e "\t$f"
         done
-    exit 1
+    	exit 1
     fi
 }
 
 
 case $command in
     add)
-	sed "s~%%DOMAIN%%~$domain~g
-	     s~%%DOMAINDIR%%~$domdir~g
-	     s~%%LISTEN%%~$listen~g" $curdir/domain.tpl > $cfile
+		sed "s~%%DOMAIN%%~$domain~g
+		     s~%%DOMAINDIR%%~$domdir~g
+	    	 s~%%LISTEN%%~$listen~g" $curdir/domain.tpl > $cfile
 
 	    $edit $cfile
 
 	    if [ "$3" == "full"  ]
 	    then
-		sitep=$sitesdir/$domdir/www
-		mkdir -p $sitep
-#		touch $logdir/$domdir/access.log
+			sitep=$sitesdir/$domdir/www
+			mkdir -p $sitep
+#			touch $logdir/$domdir/access.log
 
 	        echo -e "User-agent: *\nDisallow: /" >  $sitep/robots.txt
 	        cat $curdir/domain-index.php.tpl > $sitep/index.php

@@ -5,7 +5,7 @@ server {
 }
 
 server {
-    listen %%LISTEN%%;
+    listen %%LISTEN%%:80;
     server_name %%DOMAIN%%;
 
     index index.htm index.html index.php;
@@ -17,14 +17,14 @@ server {
 #            rewrite ^(.*)$ /index.php;
 #        }
 #    }
-
+#
 #    location ~ \.tpl$ {
 #        deny all;
 #    }
 
     location ~ \.php$ {
-	include fastcgi_params;
-	fastcgi_param  SCRIPT_FILENAME /www/sites/%%DOMAINDIR%%/www/$fastcgi_script_name;
+		include fastcgi_params;
+		fastcgi_param  SCRIPT_FILENAME /www/sites/%%DOMAINDIR%%/www/$fastcgi_script_name;
     }
 }
 

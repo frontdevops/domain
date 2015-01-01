@@ -10,4 +10,6 @@ echo 'alias ~~="cd /etc/nginx"' >> ~/.bashrc
 echo ". ~/domain/.bash_completions" >> ~/.bashrc
 echo "" >> .bashrc
 
+ln -s /usr/local/bin/domain ~/domain/domain
+
 #EOF#
