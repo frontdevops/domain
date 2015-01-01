@@ -66,7 +66,7 @@ Open file [domain](https://github.com/i0z/domain/blob/master/domain) and edit co
     # My favorite editor
     edit="mcedit"
 
-Enjoy a refreshing Diet Coke and wait
+Save file and enjoy a refreshing Diet Coke.
 
 
 ### Domain - конфигуратор для Nginx
