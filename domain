@@ -4,7 +4,7 @@
 cdir=/etc/nginx
 
 # Settings for Nginx host block
-listen="87.118.114.208"
+listen="5.45.121.18"
 logdir=/var/log/sites
 sitesdir=/www/sites
 

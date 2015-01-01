@@ -8,8 +8,10 @@ server {
     listen %%LISTEN%%:80;
     server_name %%DOMAIN%%;
 
+	set $root "/www/sites/%%DOMAINDIR%%/www";
+    root $root;
+
     index index.htm index.html index.php;
-    root /www/sites/%%DOMAINDIR%%/www;
 
 # Wordpress config example    
 #    location / {
@@ -23,8 +25,8 @@ server {
 #    }
 
     location ~ \.php$ {
-		include fastcgi_params;
-		fastcgi_param  SCRIPT_FILENAME /www/sites/%%DOMAINDIR%%/www/$fastcgi_script_name;
+		include fastcgi.conf;
+		fastcgi_param  SCRIPT_FILENAME $root/$fastcgi_script_name;
     }
 }
 
