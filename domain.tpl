@@ -5,14 +5,14 @@ server {
 }
 
 server {
-    listen %%LISTEN%%:80;
-    server_name %%DOMAIN%%;
+    listen		%%LISTEN%%:80;
+    server_name	%%DOMAIN%%;
 
-	set $sname %%DOMAIN%%;
-	set $root "/www/sites/$sname/www";
+	set $sname	%%DOMAIN%%;
+	set $root	"/www/sites/$sname/www/public";
 
-    root $root;
-    index index.htm index.html index.php;
+    root	$root;
+    index	index.php index.htm index.html;
 
 # Wordpress config example    
 #    location / {
@@ -27,30 +27,27 @@ server {
 
     location ~ \.php$ {
 		include fastcgi.conf;
-		fastcgi_param  SCRIPT_FILENAME $root/$fastcgi_script_name;
     }
 }
 
 server {
-    listen %%LISTEN%%:80;
-    server_name %%DOMAIN%%;
+    listen		%%LISTEN%%:80;
+    server_name	*.%%DOMAIN%%;
 
-	set $sname %%DOMAIN%%;
-
+	set $sname	%%DOMAIN%%;
     set $subdomain "";
-    if ($host ~* ^([a-z0-9\-\.]+)\.majorov\.su$) {
+    if ($host ~* ^([a-z0-9\-\.]+)\.%%DOMAIN%%$) {
         set $subdomain $1;
     }
-    set $root "/www/sites/$sname/$subdomain";
+    set $root "/www/sites/$sname/$subdomain/public";
 
-    root $root;
-    index index.php index.htm index.html;
+    root	$root;
+    index	index.php index.htm index.html;
 
     #add_header Access-Control-Allow-Origin "";
 
     location ~ \.php$ {
         include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $root/$fastcgi_script_name;
     }
 }
 
