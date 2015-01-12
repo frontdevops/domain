@@ -6,7 +6,6 @@ mkdir -v /etc/nginx/sites-enabled
 
 echo "Install bash completions"
 echo "" >> ~/.bashrc
-echo 'alias ~~="cd /etc/nginx"' >> ~/.bashrc
 echo ". ~/domain/.bash_completions" >> ~/.bashrc
 echo "" >> .bashrc
 
